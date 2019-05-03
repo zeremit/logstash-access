@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <statusListener class="ch.qos.logback.core.status.OnErrorConsoleStatusListener" />
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{"HH:mm:ss,SSS"} %highlight(%-5level) %-30.30t %-50.50c{50} %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+<!--    <appender name="LOGSTASH_APPLICATION" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <file>./logs/health-solutions-onboarding-application.log</file>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+<!--            <fileNamePattern>./logs/health-solutions-onboarding-application.%d{yyyy-MM-dd}.%i.zip</fileNamePattern>-->
+<!--            <maxFileSize>50MB</maxFileSize>-->
+<!--            <maxHistory>30</maxHistory>-->
+<!--            <totalSizeCap>600MB</totalSizeCap>-->
+<!--        </rollingPolicy>-->
+<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>-->
+<!--    </appender>-->
+
+    <logger name="com.twitter.finatra.http.filters.AccessLoggingFilter" level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOGSTASH_APPLICATION" />
+    </logger>
+
+<!--    <logger name="com.kharevich.server.CustomLoggingFilter" level="INFO">-->
+<!--    <appender-ref ref="CONSOLE"/>-->
+<!--</logger>-->
+
+    <logger name="com.twitter.finatra.http.filters" level="WARN"/>
+    <logger name="com.kharevich" level="TRACE"/>
+
+</configuration>
